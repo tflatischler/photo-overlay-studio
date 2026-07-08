@@ -25,7 +25,6 @@ Single-file HTML/CSS/JS application with zero dependencies. The EXIF parser read
 
 ```
 index.html            Main application
-ios-prototype.html    Interactive iOS app prototype
 ROADMAP.md            Feature roadmap
 .github/workflows/    GitHub Pages deployment
 ```
