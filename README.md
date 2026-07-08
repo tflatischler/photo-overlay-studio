@@ -16,7 +16,8 @@ A browser-based tool that reads EXIF metadata from your photos and renders it as
 Open `index.html` in a browser, drop a JPEG with EXIF data, pick a style, and export.
 
 The app is also deployed via GitHub Pages on every push to `main`.
---> [https://tflatischler.github.io/photo-overlay-studio/]
+
+[https://tflatischler.github.io/photo-overlay-studio/](Photo Overlay Studio)
 ## Tech
 
 Single-file HTML/CSS/JS application with zero dependencies. The EXIF parser reads the binary JPEG structure directly via `DataView`/`ArrayBuffer`. Overlays are rendered on a `<canvas>` element.
