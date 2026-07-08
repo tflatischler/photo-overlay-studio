@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -222,21 +222,21 @@ input,select{font-family:inherit}
 <div class="app">
   <header class="header">
     <h1>Photo <span>Overlay</span> Studio</h1>
-    <p>EXIF-Metadaten als elegante Overlays auf deine Fotos</p>
+    <p>Elegant EXIF metadata overlays for your photos</p>
   </header>
 
   <div class="upload-zone" id="uploadZone">
     <input type="file" accept="image/jpeg,image/jpg,image/tiff" id="fileInput">
     <div class="upload-icon">&#x1F4F7;</div>
-    <h2 class="upload-hint-desktop">Foto hierher ziehen oder klicken</h2>
-    <h2 class="upload-hint-mobile">Foto aufnehmen oder ausw&auml;hlen</h2>
-    <p>JPEG mit EXIF-Daten &middot; z.B. direkt aus der Kamera</p>
+    <h2 class="upload-hint-desktop">Drag a photo here or click to upload</h2>
+    <h2 class="upload-hint-mobile">Take or select a photo</h2>
+    <p>JPEG with EXIF data &middot; e.g. straight from the camera</p>
   </div>
 
   <div class="editor" id="editor">
     <div>
       <div class="new-photo-row">
-        <button class="btn btn-secondary" id="btnNewPhoto">Neues Foto</button>
+        <button class="btn btn-secondary" id="btnNewPhoto">New Photo</button>
       </div>
       <div class="preview-area">
         <canvas id="previewCanvas"></canvas>
@@ -247,7 +247,7 @@ input,select{font-family:inherit}
       <!-- EXIF Info -->
       <div class="panel" id="panelExif">
         <div class="panel-header" onclick="togglePanel('panelExif')">
-          <div class="panel-title" style="margin-bottom:0">Kamera-Daten</div>
+          <div class="panel-title" style="margin-bottom:0">Camera Data</div>
           <span class="panel-toggle">&#9660;</span>
         </div>
         <div class="panel-body">
@@ -257,7 +257,7 @@ input,select{font-family:inherit}
 
       <!-- Overlay Styles -->
       <div class="panel">
-        <div class="panel-title">Overlay-Stil</div>
+        <div class="panel-title">Overlay Style</div>
         <div class="style-grid" id="styleGrid">
           <button class="style-card active" data-style="classic">
             <div class="style-icon">&#9608;</div>
@@ -289,17 +289,17 @@ input,select{font-family:inherit}
       <!-- Controls -->
       <div class="panel" id="panelSettings">
         <div class="panel-header" onclick="togglePanel('panelSettings')">
-          <div class="panel-title" style="margin-bottom:0">Einstellungen</div>
+          <div class="panel-title" style="margin-bottom:0">Settings</div>
           <span class="panel-toggle">&#9660;</span>
         </div>
         <div class="panel-body">
           <div style="margin-top:12px">
             <div class="control-row">
-              <label>Deckkraft</label>
+              <label>Opacity</label>
               <input type="range" id="opacity" min="30" max="100" value="85">
             </div>
             <div class="control-row">
-              <label>Schrift</label>
+              <label>Font</label>
               <select id="fontSelect">
                 <option value="sans">Sans-Serif (Clean)</option>
                 <option value="mono">Monospace (Tech)</option>
@@ -309,12 +309,12 @@ input,select{font-family:inherit}
             <div class="control-row">
               <label>Position</label>
               <select id="positionSelect">
-                <option value="bottom">Unten</option>
-                <option value="top">Oben</option>
-                <option value="bottom-left">Unten links</option>
-                <option value="bottom-right">Unten rechts</option>
-                <option value="top-left">Oben links</option>
-                <option value="top-right">Oben rechts</option>
+                <option value="bottom">Bottom</option>
+                <option value="top">Top</option>
+                <option value="bottom-left">Bottom Left</option>
+                <option value="bottom-right">Bottom Right</option>
+                <option value="top-left">Top Left</option>
+                <option value="top-right">Top Right</option>
               </select>
             </div>
           </div>
@@ -325,7 +325,7 @@ input,select{font-family:inherit}
       <div class="panel panel-export">
         <div class="panel-title">Export</div>
         <div class="btn-group">
-          <button class="btn btn-primary" id="btnDownloadJpg">JPG speichern</button>
+          <button class="btn btn-primary" id="btnDownloadJpg">Save JPG</button>
           <button class="btn btn-secondary" id="btnDownloadPng">PNG</button>
         </div>
       </div>
@@ -334,7 +334,7 @@ input,select{font-family:inherit}
 
   <!-- Mobile sticky download bar -->
   <div class="mobile-download" id="mobileDownload">
-    <button class="btn btn-primary" id="btnDownloadJpgMobile">JPG speichern</button>
+    <button class="btn btn-primary" id="btnDownloadJpgMobile">Save JPG</button>
     <button class="btn btn-secondary" id="btnDownloadPngMobile">PNG</button>
   </div>
 </div>
@@ -538,7 +538,7 @@ $('#btnNewPhoto').addEventListener('click', () => {
 
 function handleFile(file) {
   if (!file.type.match(/image\/(jpeg|jpg|tiff)/)) {
-    showToast('Bitte ein JPEG-Bild hochladen');
+    showToast('Please upload a JPEG image');
     return;
   }
 
@@ -572,15 +572,15 @@ function renderExifInfo() {
   const cam = friendlyModel(e.make, e.model);
   const lens = e.lensModel || '–';
   const items = [
-    { label: 'Kamera', value: cam, full: true },
-    { label: 'Objektiv', value: lens, full: true },
-    { label: 'Blende', value: formatAperture(e) },
+    { label: 'Camera', value: cam, full: true },
+    { label: 'Lens', value: lens, full: true },
+    { label: 'Aperture', value: formatAperture(e) },
     { label: 'Shutter', value: formatShutter(e) },
     { label: 'ISO', value: formatISO(e) },
-    { label: 'Auflösung', value: formatResolution(e) },
+    { label: 'Resolution', value: formatResolution(e) },
   ];
   const focal = formatFocal(e);
-  if (focal) items.splice(2, 0, { label: 'Brennweite', value: focal });
+  if (focal) items.splice(2, 0, { label: 'Focal Length', value: focal });
 
   exifGrid.innerHTML = items.map(it =>
     `<div class="exif-item${it.full ? ' full' : ''}"><div class="label">${it.label}</div><div class="value">${it.value}</div></div>`
@@ -920,7 +920,7 @@ function downloadImage(format) {
     a.download = `photo_overlay.${format}`;
     a.click();
     URL.revokeObjectURL(url);
-    showToast('Bild heruntergeladen!');
+    showToast('Image downloaded!');
   }, mime, quality);
 }
 
