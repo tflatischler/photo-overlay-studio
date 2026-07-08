@@ -1,6 +1,6 @@
 # Photo Overlay Studio
 
-A browser-based tool that reads EXIF metadata from your photos and renders it as a stylish overlay directly on the image. No server, no uploads -- everything runs locally in your browser.
+A browser-based tool that reads EXIF metadata from your photos and renders it as a stylish overlay directly on the image. No server, no uploads: everything runs locally in your browser.
 
 ## Features
 
