@@ -22,6 +22,10 @@ export default defineConfig({
       use: { viewport: { width: 393, height: 852 } },
     },
     {
+      name: 'iphone-13-mini',
+      use: { viewport: { width: 375, height: 812 } },
+    },
+    {
       name: 'iphone-se',
       use: { viewport: { width: 320, height: 568 } },
     },
