@@ -1,0 +1,374 @@
+<title>Photo Overlay Studio — Roadmap</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ground: #F5F3EE;
+  --ink: #1C1C1F;
+  --ink-2: #3A3733;
+  --accent: #B8860B;
+  --accent-soft: rgba(184,134,11,0.06);
+  --muted: #948D80;
+  --hairline: #D6D1C8;
+  --ring: #C4B898;
+
+  --mono: 'SF Mono','Cascadia Code','JetBrains Mono',Consolas,monospace;
+  --sans: -apple-system,'Segoe UI',system-ui,sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #131315;
+    --ink: #E5E2DB;
+    --ink-2: #BFB9AE;
+    --accent: #D49B3B;
+    --accent-soft: rgba(212,155,59,0.08);
+    --muted: #76716A;
+    --hairline: #2A292D;
+    --ring: #7A7264;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #131315;
+  --ink: #E5E2DB;
+  --ink-2: #BFB9AE;
+  --accent: #D49B3B;
+  --accent-soft: rgba(212,155,59,0.08);
+  --muted: #76716A;
+  --hairline: #2A292D;
+  --ring: #7A7264;
+}
+:root[data-theme="light"] {
+  --ground: #F5F3EE;
+  --ink: #1C1C1F;
+  --ink-2: #3A3733;
+  --accent: #B8860B;
+  --accent-soft: rgba(184,134,11,0.06);
+  --muted: #948D80;
+  --hairline: #D6D1C8;
+  --ring: #C4B898;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--ground);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: clamp(40px,8vw,96px) clamp(20px,5vw,48px);
+}
+
+/* ── Header ── */
+.header { margin-bottom: clamp(52px,9vw,84px); }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-size: clamp(30px,5.5vw,44px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin-bottom: 16px;
+}
+
+.lead {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 440px;
+}
+
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  padding-left: 48px;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 17px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: var(--hairline);
+}
+
+/* ── Phase ── */
+.phase {
+  position: relative;
+  padding-bottom: clamp(40px,6vw,60px);
+}
+.phase:last-child { padding-bottom: 0; }
+
+.phase-dot {
+  position: absolute;
+  left: -35px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--ground);
+}
+
+.phase-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.phase-title {
+  font-size: clamp(19px,3vw,23px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+
+/* ── Features ── */
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background 0.15s ease;
+}
+.feature:hover { background: var(--accent-soft); }
+
+.feature-ring {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ring);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.feature-body { min-width: 0; }
+
+.feature-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.feature-desc {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-top: 1px;
+}
+
+/* ── Footer ── */
+.foot {
+  margin-top: clamp(48px,8vw,80px);
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .timeline { padding-left: 32px; }
+  .timeline-line { left: 9px; }
+  .phase-dot {
+    left: -27px;
+    width: 8px;
+    height: 8px;
+    top: 6px;
+  }
+  .feature { padding: 6px 8px; gap: 8px; }
+  .feature-ring { margin-top: 5px; width: 6px; height: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature { transition: none; }
+}
+</style>
+
+<div class="page">
+  <header class="header">
+    <p class="eyebrow">Roadmap</p>
+    <h1>Photo Overlay Studio</h1>
+    <p class="lead">Von schnellen Verbesserungen zur nativen App — fünf Phasen auf dem Weg zum vollwertigen Foto-Overlay-Werkzeug.</p>
+  </header>
+
+  <main class="timeline" role="list">
+    <div class="timeline-line" aria-hidden="true"></div>
+
+    <section class="phase" role="listitem">
+      <div class="phase-dot" aria-hidden="true"></div>
+      <span class="phase-label">Phase 1</span>
+      <h2 class="phase-title">Quick Wins</h2>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Wasserzeichen / Custom Text</span>
+            <span class="feature-desc">Eigenen Text (z.B. Instagram-Handle, Copyright) als zusätzliche Zeile im Overlay</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Datum &amp; Uhrzeit</span>
+            <span class="feature-desc">EXIF DateTimeOriginal als optionales Overlay-Feld</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Transparenter PNG-Layer Export</span>
+            <span class="feature-desc">Nur das Overlay als transparente PNG exportieren, zur Weiterverarbeitung in anderen Apps</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="phase" role="listitem">
+      <div class="phase-dot" aria-hidden="true"></div>
+      <span class="phase-label">Phase 2</span>
+      <h2 class="phase-title">Mehr Kontrolle</h2>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Farbanpassung</span>
+            <span class="feature-desc">Akzentfarbe des Overlays frei wählbar (Color Picker)</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Overlay-Größe</span>
+            <span class="feature-desc">Schriftgröße per Slider steuern</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Batch-Verarbeitung</span>
+            <span class="feature-desc">Mehrere Fotos gleichzeitig mit demselben Overlay-Stil exportieren</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Live Drag &amp; Drop</span>
+            <span class="feature-desc">Overlay-Position direkt im Preview per Maus/Touch verschieben</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="phase" role="listitem">
+      <div class="phase-dot" aria-hidden="true"></div>
+      <span class="phase-label">Phase 3</span>
+      <h2 class="phase-title">Erweiterte Features</h2>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Mehr Kamera-Marken</span>
+            <span class="feature-desc">Canon, Nikon, Fujifilm, Panasonic Modell-Mapping</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Preset-Sharing</span>
+            <span class="feature-desc">Overlay-Einstellungen per URL teilen</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">PWA / Offline</span>
+            <span class="feature-desc">Als App installierbar mit Service Worker</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">Social Media Formate</span>
+            <span class="feature-desc">Automatisches Zuschneiden für Instagram Story (9:16), Post (1:1, 4:5) etc.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="phase" role="listitem">
+      <div class="phase-dot" aria-hidden="true"></div>
+      <span class="phase-label">Phase 4</span>
+      <h2 class="phase-title">Pro Features</h2>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">RAW-Support</span>
+            <span class="feature-desc">DNG/ARW Vorschau mit EXIF-Extraktion</span>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">GPS-Karte</span>
+            <span class="feature-desc">Kleine Kartenvorschau wenn Standortdaten in EXIF vorhanden</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="phase" role="listitem">
+      <div class="phase-dot" aria-hidden="true"></div>
+      <span class="phase-label">Phase 5</span>
+      <h2 class="phase-title">Native App</h2>
+      <ul class="features">
+        <li class="feature">
+          <span class="feature-ring" aria-hidden="true"></span>
+          <div class="feature-body">
+            <span class="feature-name">iOS App</span>
+            <span class="feature-desc">Native iOS App mit Share Extension — Foto direkt aus der Galerie teilen</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    14 Features geplant · Alle Phasen offen
+  </footer>
+</div>
