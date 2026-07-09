@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Photo Overlay Studio</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -12,12 +12,12 @@
   --radius:12px;--radius-sm:8px;
   --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
 }
-html{font-size:15px;overflow-x:hidden;overflow-x:clip}
-body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;overflow-x:clip}
+html{font-size:15px;overflow-x:hidden;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-x:clip}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select{font-family:inherit}
 
-.app{max-width:1400px;margin:0 auto;padding:24px 20px}
+.app{max-width:1400px;margin:0 auto;padding:24px 20px;padding-top:max(24px,env(safe-area-inset-top))}
 
 /* Header */
 .header{text-align:center;padding:40px 0 32px}
@@ -50,7 +50,7 @@ input,select{font-family:inherit}
   min-height:500px;position:relative;
 }
 .preview-area canvas{
-  max-width:100%;max-height:70vh;border-radius:4px;
+  display:block;max-width:100%;max-height:70vh;max-height:70dvh;border-radius:4px;
   box-shadow:0 8px 32px rgba(0,0,0,.4);
   min-width:0;
 }
@@ -175,9 +175,10 @@ input,select{font-family:inherit}
   .preview-area{
     min-height:auto;padding:6px;border-radius:var(--radius-sm);
     border:none;background:transparent;overflow:hidden;
+    width:100%;
   }
   .preview-area canvas{
-    max-height:50vh;border-radius:4px;
+    max-height:50vh;max-height:50dvh;border-radius:4px;
     box-shadow:0 4px 20px rgba(0,0,0,.35);
   }
 
@@ -226,10 +227,14 @@ input,select{font-family:inherit}
   .editor.active ~ .mobile-download{
     display:flex;gap:8px;
     position:fixed;bottom:0;left:0;right:0;
-    padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));
+    padding:12px 16px;
+    padding-bottom:max(12px,env(safe-area-inset-bottom));
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
     background:rgba(14,14,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-top:1px solid var(--border);z-index:90;
     box-shadow:0 -4px 24px rgba(0,0,0,.4);
+    -webkit-transform:translateZ(0);transform:translateZ(0);
   }
   .mobile-download .btn{flex:1;padding:14px 16px;font-size:.9rem;font-weight:600}
 
@@ -259,7 +264,7 @@ input,select{font-family:inherit}
   .upload-zone{padding:24px 16px}
   .upload-icon{font-size:1.8rem;margin-bottom:6px}
   .preview-area{min-height:auto;padding:6px;border:none;background:transparent;overflow:hidden}
-  .preview-area canvas{max-height:58vh}
+  .preview-area canvas{max-height:58vh;max-height:58dvh}
   .editor.active{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;
   }
@@ -281,10 +286,14 @@ input,select{font-family:inherit}
   .editor.active ~ .mobile-download{
     display:flex;gap:8px;
     position:fixed;bottom:0;left:0;right:0;
-    padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom));
+    padding:8px 16px;
+    padding-bottom:max(8px,env(safe-area-inset-bottom));
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
     background:rgba(14,14,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-top:1px solid var(--border);z-index:90;
     box-shadow:0 -4px 24px rgba(0,0,0,.4);
+    -webkit-transform:translateZ(0);transform:translateZ(0);
   }
   .mobile-download .btn{flex:1;padding:10px 14px;font-size:.82rem;min-height:38px}
   .toast{bottom:56px}
