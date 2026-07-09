@@ -32,13 +32,18 @@ Single-file HTML/CSS/JS application with zero dependencies. The EXIF parser read
 - add more camera models and brands for parsing
 - develop features for image scale and ratio
 - export overlay as transparent png layer
-- **iOS APP** -> `APP.md`
+- **iOS APP**
 - add support for self-hosted app-connectors
 
 ## Project Structure
 
 ```
-index.html            Main application
-ROADMAP.md            Feature roadmap
-.github/workflows/    GitHub Pages deployment
+index.html                Main application
+README.md                 Project overview
+docs/
+  ROADMAP.md              Feature roadmap
+  PROMO.md                Promo copy for Reddit
+  REDDIT_PROMOPLAN.md     Reddit promotion plan
+  roadmap.html            Visual roadmap page
+.github/workflows/        GitHub Pages deployment
 ```
