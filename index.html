@@ -12,8 +12,8 @@
   --radius:12px;--radius-sm:8px;
   --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
 }
-html{font-size:15px;overflow-x:clip}
-body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:clip}
+html{font-size:15px;overflow-x:hidden;overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;overflow-x:clip}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select{font-family:inherit}
 
@@ -47,7 +47,7 @@ input,select{font-family:inherit}
   background:var(--surface);border-radius:var(--radius);
   border:1px solid var(--border);padding:16px;
   display:flex;align-items:center;justify-content:center;
-  min-height:500px;position:relative;overflow:hidden;
+  min-height:500px;position:relative;
 }
 .preview-area canvas{
   max-width:100%;max-height:70vh;border-radius:4px;
@@ -142,7 +142,8 @@ input,select{font-family:inherit}
 
 /* ── Tablet ── */
 @media(max-width:900px){
-  .editor.active{grid-template-columns:1fr}
+  .editor.active{grid-template-columns:minmax(0,1fr)}
+  .editor.active > div{min-width:0}
 }
 
 /* ── Mobile ── */
@@ -159,7 +160,8 @@ input,select{font-family:inherit}
   .upload-zone h2{font-size:1rem}
   .upload-hint-desktop{display:none}
 
-  .editor.active{grid-template-columns:1fr;gap:12px}
+  .editor.active{grid-template-columns:minmax(0,1fr);gap:12px}
+  .editor.active > div{min-width:0}
 
   /* New-photo row: compact toolbar style */
   .new-photo-row{
@@ -172,7 +174,7 @@ input,select{font-family:inherit}
 
   .preview-area{
     min-height:auto;padding:6px;border-radius:var(--radius-sm);
-    border-color:transparent;background:transparent;
+    border:none;background:transparent;overflow:hidden;
   }
   .preview-area canvas{
     max-height:50vh;border-radius:4px;
@@ -256,11 +258,12 @@ input,select{font-family:inherit}
   .header p{display:none}
   .upload-zone{padding:24px 16px}
   .upload-icon{font-size:1.8rem;margin-bottom:6px}
-  .preview-area{min-height:auto;padding:6px;border-color:transparent;background:transparent}
+  .preview-area{min-height:auto;padding:6px;border:none;background:transparent;overflow:hidden}
   .preview-area canvas{max-height:58vh}
   .editor.active{
-    grid-template-columns:1fr 1fr;gap:10px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;
   }
+  .editor.active > div{min-width:0}
   .editor.active > div:first-child{position:sticky;top:8px;align-self:start}
   .sidebar{gap:8px}
   .panel{padding:10px;border-radius:var(--radius-sm)}
