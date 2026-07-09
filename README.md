@@ -23,12 +23,17 @@ The app is also deployed via GitHub Pages:
 
 Single-file HTML/CSS/JS application with zero dependencies. The EXIF parser reads the binary JPEG structure directly via `DataView`/`ArrayBuffer`. Overlays are rendered on a `<canvas>` element.
 
+## Privacy
+- everything stays on your device: application is 100% browserbased
+- self-hostable
+
 ## Future Plans
 
 - add more camera models and brands for parsing
 - develop features for image scale and ratio
 - export overlay as transparent png layer
 - **iOS APP** -> `APP.md`
+- add support for self-hosted app-connectors
 
 ## Project Structure
 
