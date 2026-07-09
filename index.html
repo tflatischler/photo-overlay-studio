@@ -127,6 +127,10 @@ input,select{font-family:inherit}
 .panel-body{overflow:hidden;transition:max-height .25s ease,opacity .2s;max-height:600px;opacity:1}
 .panel.collapsed .panel-body{max-height:0;opacity:0}
 
+/* Style scroll wrap – no fade on desktop, only on mobile */
+.style-scroll-wrap{position:relative}
+.style-scroll-wrap::after{display:none}
+
 /* Mobile download bar - hidden until editor active */
 .mobile-download{display:none}
 
@@ -145,24 +149,33 @@ input,select{font-family:inherit}
   html{font-size:14px}
   .app{padding:12px 12px 100px}
 
-  .header{padding:20px 0 16px}
-  .header h1{font-size:1.4rem}
-  .header p{font-size:.78rem}
+  .header{padding:16px 0 12px}
+  .header h1{font-size:1.35rem}
+  .header p{font-size:.75rem;margin-top:4px}
 
-  .upload-zone{padding:48px 16px;border-radius:var(--radius-sm)}
+  .upload-zone{padding:56px 20px;border-radius:var(--radius-sm)}
   .upload-icon{font-size:2.4rem;margin-bottom:10px}
   .upload-zone h2{font-size:1rem}
   .upload-hint-desktop{display:none}
 
   .editor.active{grid-template-columns:1fr;gap:12px}
-  .new-photo-row{margin-bottom:8px}
+
+  /* New-photo row: compact toolbar style */
+  .new-photo-row{
+    margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .new-photo-row .btn{
+    padding:8px 14px;font-size:.78rem;min-height:36px;
+    border-radius:6px;
+  }
 
   .preview-area{
-    min-height:auto;padding:8px;border-radius:var(--radius-sm);
+    min-height:auto;padding:6px;border-radius:var(--radius-sm);
+    border-color:transparent;background:transparent;
   }
   .preview-area canvas{
-    max-height:50vh;border-radius:2px;
-    box-shadow:0 4px 16px rgba(0,0,0,.3);
+    max-height:50vh;border-radius:4px;
+    box-shadow:0 4px 20px rgba(0,0,0,.35);
   }
 
   .sidebar{gap:10px}
@@ -175,7 +188,13 @@ input,select{font-family:inherit}
   }
   .panel.collapsed .panel-header .panel-toggle{transform:rotate(-90deg)}
 
-  /* Style selector: horizontal scroll */
+  /* Style selector: horizontal scroll with fade hints */
+  .style-scroll-wrap{position:relative}
+  .style-scroll-wrap::after{
+    content:'';position:absolute;top:0;right:0;bottom:4px;width:32px;
+    background:linear-gradient(to right,transparent,var(--surface));
+    pointer-events:none;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  }
   .style-grid{
     display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;
     scroll-snap-type:x mandatory;padding-bottom:4px;
@@ -183,7 +202,7 @@ input,select{font-family:inherit}
   }
   .style-grid::-webkit-scrollbar{display:none}
   .style-card{
-    flex:0 0 auto;min-width:90px;scroll-snap-align:start;
+    flex:0 0 auto;min-width:88px;scroll-snap-align:start;
     padding:10px 12px;
   }
   .style-card .style-icon{font-size:1.1rem;margin-bottom:2px}
@@ -205,8 +224,9 @@ input,select{font-family:inherit}
     display:flex;gap:8px;
     position:fixed;bottom:0;left:0;right:0;
     padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));
-    background:rgba(14,14,14,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    background:rgba(14,14,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-top:1px solid var(--border);z-index:90;
+    box-shadow:0 -4px 24px rgba(0,0,0,.4);
   }
   .mobile-download .btn{flex:1;padding:14px 16px;font-size:.9rem;font-weight:600}
 
@@ -214,6 +234,56 @@ input,select{font-family:inherit}
   .btn-secondary{padding:10px 16px}
 
   .toast{bottom:80px;font-size:.78rem;padding:10px 16px}
+}
+
+/* ── Very small screens (iPhone SE, etc.) ── */
+@media(max-width:374px){
+  .app{padding:10px 8px 100px}
+  .header h1{font-size:1.2rem}
+  .exif-grid{grid-template-columns:1fr}
+  .exif-item.full{grid-column:auto}
+  .style-card{min-width:80px;padding:8px 10px}
+  .style-card .style-name{font-size:.68rem}
+  .control-row label{min-width:52px}
+}
+
+/* ── Mobile landscape (phones in landscape up to ~932px) ── */
+@media(max-height:500px) and (orientation:landscape){
+  .app{padding:8px 16px 72px}
+  .header{padding:6px 0}
+  .header h1{font-size:1.2rem}
+  .header p{display:none}
+  .upload-zone{padding:24px 16px}
+  .upload-icon{font-size:1.8rem;margin-bottom:6px}
+  .preview-area{min-height:auto;padding:6px;border-color:transparent;background:transparent}
+  .preview-area canvas{max-height:58vh}
+  .editor.active{
+    grid-template-columns:1fr 1fr;gap:10px;
+  }
+  .editor.active > div:first-child{position:sticky;top:8px;align-self:start}
+  .sidebar{gap:8px}
+  .panel{padding:10px;border-radius:var(--radius-sm)}
+  .panel-header{cursor:pointer}
+  .panel-header .panel-toggle{display:block;font-size:.7rem;color:var(--text-dim);transition:transform .2s}
+  .panel.collapsed .panel-header .panel-toggle{transform:rotate(-90deg)}
+  .panel-export{display:none}
+  .style-scroll-wrap::after{display:block}
+  .style-grid{
+    display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none;
+  }
+  .style-grid::-webkit-scrollbar{display:none}
+  .style-card{flex:0 0 auto;min-width:80px;scroll-snap-align:start;padding:8px 10px}
+  .editor.active ~ .mobile-download{
+    display:flex;gap:8px;
+    position:fixed;bottom:0;left:0;right:0;
+    padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom));
+    background:rgba(14,14,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--border);z-index:90;
+    box-shadow:0 -4px 24px rgba(0,0,0,.4);
+  }
+  .mobile-download .btn{flex:1;padding:10px 14px;font-size:.82rem;min-height:38px}
+  .toast{bottom:56px}
 }
 </style>
 </head>
@@ -226,7 +296,7 @@ input,select{font-family:inherit}
   </header>
 
   <div class="upload-zone" id="uploadZone">
-    <input type="file" accept="image/jpeg,image/jpg,image/tiff" id="fileInput">
+    <input type="file" accept="image/jpeg,image/jpg,image/tiff,image/*" id="fileInput">
     <div class="upload-icon">&#x1F4F7;</div>
     <h2 class="upload-hint-desktop">Drag a photo here or click to upload</h2>
     <h2 class="upload-hint-mobile">Take or select a photo</h2>
@@ -256,33 +326,40 @@ input,select{font-family:inherit}
       </div>
 
       <!-- Overlay Styles -->
-      <div class="panel">
-        <div class="panel-title">Overlay Style</div>
-        <div class="style-grid" id="styleGrid">
-          <button class="style-card active" data-style="classic">
-            <div class="style-icon">&#9608;</div>
-            <div class="style-name">Classic Bar</div>
-          </button>
-          <button class="style-card" data-style="minimal">
-            <div class="style-icon">&#9642;</div>
-            <div class="style-name">Minimal</div>
-          </button>
-          <button class="style-card" data-style="film">
-            <div class="style-icon">&#9634;</div>
-            <div class="style-name">Film</div>
-          </button>
-          <button class="style-card" data-style="editorial">
-            <div class="style-icon">&#9481;</div>
-            <div class="style-name">Editorial</div>
-          </button>
-          <button class="style-card" data-style="stamp">
-            <div class="style-icon">&#9641;</div>
-            <div class="style-name">Stamp</div>
-          </button>
-          <button class="style-card" data-style="gradient">
-            <div class="style-icon">&#9699;</div>
-            <div class="style-name">Gradient</div>
-          </button>
+      <div class="panel" id="panelStyles">
+        <div class="panel-header" onclick="togglePanel('panelStyles')">
+          <div class="panel-title" style="margin-bottom:0">Overlay Style</div>
+          <span class="panel-toggle">&#9660;</span>
+        </div>
+        <div class="panel-body">
+          <div class="style-scroll-wrap" style="margin-top:12px">
+            <div class="style-grid" id="styleGrid">
+              <button class="style-card active" data-style="classic">
+                <div class="style-icon">&#9608;</div>
+                <div class="style-name">Classic Bar</div>
+              </button>
+              <button class="style-card" data-style="minimal">
+                <div class="style-icon">&#9642;</div>
+                <div class="style-name">Minimal</div>
+              </button>
+              <button class="style-card" data-style="film">
+                <div class="style-icon">&#9634;</div>
+                <div class="style-name">Film</div>
+              </button>
+              <button class="style-card" data-style="editorial">
+                <div class="style-icon">&#9481;</div>
+                <div class="style-name">Editorial</div>
+              </button>
+              <button class="style-card" data-style="stamp">
+                <div class="style-icon">&#9641;</div>
+                <div class="style-name">Stamp</div>
+              </button>
+              <button class="style-card" data-style="gradient">
+                <div class="style-icon">&#9699;</div>
+                <div class="style-name">Gradient</div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -937,22 +1014,27 @@ function showToast(msg) {
 }
 
 // ── Mobile / Responsive ──────────────────────────────────
-function isMobile() { return window.matchMedia('(max-width:768px)').matches; }
+function isCompact() {
+  return window.matchMedia('(max-width:768px)').matches ||
+         window.matchMedia('(max-height:500px) and (orientation:landscape)').matches;
+}
 
 function togglePanel(id) {
-  if (!isMobile()) return;
+  if (!isCompact()) return;
   document.getElementById(id).classList.toggle('collapsed');
 }
 
-function initMobile() {
-  if (!isMobile()) return;
+function initCompact() {
+  if (!isCompact()) return;
   document.getElementById('panelExif').classList.add('collapsed');
   document.getElementById('panelSettings').classList.add('collapsed');
 }
 
-initMobile();
+initCompact();
 window.addEventListener('resize', () => {
-  if (!isMobile()) {
+  if (isCompact()) {
+    initCompact();
+  } else {
     document.querySelectorAll('.panel.collapsed').forEach(p => p.classList.remove('collapsed'));
   }
 });
