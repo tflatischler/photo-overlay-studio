@@ -28,7 +28,7 @@ Single-file HTML/CSS/JS application with zero dependencies. The EXIF parser read
 - add more camera models and brands for parsing
 - develop features for image scale and ratio
 - export overlay as transparent png layer
-- **iOS APP** -> APP.md
+- **iOS APP** -> `APP.md`
 
 ## Project Structure
 
