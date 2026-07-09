@@ -1044,10 +1044,12 @@ function initCompact() {
 }
 
 initCompact();
+let lastVW = document.documentElement.clientWidth;
 window.addEventListener('resize', () => {
-  if (isCompact()) {
-    initCompact();
-  } else {
+  const vw = document.documentElement.clientWidth;
+  if (vw === lastVW) return;
+  lastVW = vw;
+  if (!isCompact()) {
     document.querySelectorAll('.panel.collapsed').forEach(p => p.classList.remove('collapsed'));
   }
 });
