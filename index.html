@@ -1037,22 +1037,20 @@ function togglePanel(id) {
   document.getElementById(id).classList.toggle('collapsed');
 }
 
-function initCompact() {
-  if (!isCompact()) return;
+if (isCompact()) {
   document.getElementById('panelExif').classList.add('collapsed');
   document.getElementById('panelSettings').classList.add('collapsed');
 }
 
-initCompact();
-let lastVW = document.documentElement.clientWidth;
-window.addEventListener('resize', () => {
-  const vw = document.documentElement.clientWidth;
-  if (vw === lastVW) return;
-  lastVW = vw;
-  if (!isCompact()) {
+const mqMobile = window.matchMedia('(max-width:768px)');
+const mqLandscape = window.matchMedia('(max-height:500px) and (orientation:landscape)');
+function onLayoutChange() {
+  if (!mqMobile.matches && !mqLandscape.matches) {
     document.querySelectorAll('.panel.collapsed').forEach(p => p.classList.remove('collapsed'));
   }
-});
+}
+mqMobile.addEventListener('change', onLayoutChange);
+mqLandscape.addEventListener('change', onLayoutChange);
 </script>
 </body>
 </html>
